@@ -1,0 +1,8 @@
+not_to_public.py
+#.gitignore
+__pycache__
+.idea
+venv
+env
+.pytest_cache
+.coverge
