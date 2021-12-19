@@ -1,0 +1,94 @@
+body{
+    background-color: var(--orange);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+:root{
+    --orange: #f5a17d;
+    --Darkblue: #242582;
+    --eggPlant: #553D67;
+    --lightBrown: #99738E;
+    --turkiz: #41b3a3;
+}
+
+#GridContainter{
+    display: grid;
+    grid-template-areas:
+    'Header Header Header'
+    'left Main Main' 
+    'left Main Main' ;
+}
+
+
+
+#header{
+    grid-area: Header;
+    height: 400px;
+    width: 1400px;
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    text-align: center;
+    font-size: 70px;
+    color: var(--Darkblue);
+    
+}
+
+#left{
+    grid-area: left;
+    height: 550px;
+    width: 350px;
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+}
+
+#center{
+    grid-area: Main;
+    height: 1650px;
+    width: 950px;
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+}
+
+label{
+    color: var(--lightBrown);
+}
+h1{
+font-size: 40px;
+color: var(--Darkblue);
+}
+
+h2{
+font-size: 30px;
+color: var(--lightBrown);
+}
+
+h3{
+font-size: 20px;
+color: var(--eggPlant);
+}
+
+@media only screen and (max-width: 600px)
+{
+    body{
+        background-color: var(--turkiz);
+    }
+}
+
+@keyframes RotatingPug {
+    0%{
+        transform: rotate(0deg);
+    }    
+    
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+img{
+    animation-name: RotatingPug;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% set Page_name = "my hobbies page" %}
+{% block title %}
+      Hobbies
+{% endblock %}
+
+{% block body %}
+
+   {{ super() }}
+
+    <br><h2>My hobbies:</h2>
+    <ul>
+    {% for value in hobbies %}
+        <li>{{ value | default('NO Hobbies',true) | upper }}</li><br>
+    {% endfor %}
+     </ul>
+
+
+{% endblock %}

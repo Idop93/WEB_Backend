@@ -1,26 +1,42 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for,render_template
+from flask import request
+from flask import session
+
 app = Flask(__name__)
 
-
+# Home page
+@app.route('/ido')
 @app.route('/')
-def hello_world():  # put application's code here
-    return render_template('index.html')
+def main_func():  # put application's code here
+    # TODO
+    return redirect(url_for('home_func'))
 
-@app.route('/home')
-def check_red():
-    return redirect('/')
+@app.route('/Home')
+def home_func():
+    return render_template('welcome.html')
 
-@app.route('/help')
-def check_url():
-    return redirect(url_for('hello_world'))
+# About me page
+@app.route('/About_me')
+def about_func():
+    return render_template('CV.html')
 
-@app.route('/about') #code from lecture 2 of backend, not relevant to this weeks homework
-def about():
-    return render_template('about.html',
-                           uni = 'BGU',
-                           profile = {'name': 'Ido', 'lastname': 'Polak'},
-                           degrees = ['BSc', 'MSc']
-                           )
+
+# Hobbies page
+@app.route('/hobbies')
+def hobbies_func():
+    return render_template('assignment8.html',
+                           hobbies = ['Soccer','Football','Running','Playing drums','hiking','','diving'])
+
+# Contact page
+@app.route('/contact')
+def contact_func():
+    if 'y_name' in request.args:
+          name = request.args['y_name']
+          email = request.args['y_email']
+          password = request.args['y_password']
+          return render_template('contact.html', user_name = name,user_email = email,user_password = password)
+    return render_template('contact.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
