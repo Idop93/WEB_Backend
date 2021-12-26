@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for,render_template
 from flask import request
 from flask import session
 from  interact_with_db import interact_db
-from datetime import date
+
 
 app = Flask(__name__)
 app.secret_key = '123'
