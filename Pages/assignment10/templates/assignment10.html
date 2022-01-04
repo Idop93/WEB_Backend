@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% set Page_name = 'Assignment 9' %}
+{% block title %}
+      assignment10
+{% endblock %}
+{% block body %}
+   {{ super() }}
+    <div class="col-12-main">
+
+        <div class="col-3-main">
+           <h2>Insert form</h2>
+            <form action="/insert_user" method="POST">
+                Name: <input name="name" type="text"> <br><br>
+                Email: <input name="email" type="email"> <br><br>
+                Phone: <input name="phone" type="phone"> <br><br>
+                <input type="submit" value="Insert">
+            </form>
+        </div>
+        <div class="col-3-main">
+            <h2>Update form</h2>
+            <form action="/update_user" method="POST">
+                Name: <input name="name" type="text"> <br><br>
+                New Email: <input name="new_email" type="email"> <br><br>
+                New Phone: <input name="new_phone" type="phone"> <br><br>
+            <input type="submit" value="Update">
+        </form>
+        </div>
+        <div class="col-3-main">
+            <h2>Delete form</h2>
+            <form action="/delete_user" method="POST">
+                Name: <input name="name" type="text"> <br><br>
+                <input type="submit" value="Delete">
+             </form>
+        </div>
+        <div class="col-3-main">
+            {% if user_list %}
+                <h2>User List:</h2>
+                <ul>
+                    {% for user in user_list %}
+                    <li>
+                        <b>Name:</b> {{ user.name }}, <b>Email:</b> {{ user.email }}, <b>Phone:</b> {{ user.phone }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+            <p>{{ change_message }}</p>
+
+            {% else %}
+                <br>
+                <form action="/user_list" method="GET">
+                    <input type="submit" value="Show User List">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
