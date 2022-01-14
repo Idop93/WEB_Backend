@@ -1,5 +1,8 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, Blueprint
+from interact_with_db import interact_db, query_json
 from Pages.assignment10.assignment10 import assignment10
+import requests
+import json
 
 app = Flask(__name__)
 app.register_blueprint(assignment10)
@@ -81,6 +84,22 @@ def req_frontend_func():
 
 from Pages.assignment10.assignment10 import assignment10
 app.register_blueprint(assignment10)
+
+@app.route('/assignment11/users', methods=['GET'])
+def get_users():
+    if request.method == 'GET':
+        query = "select * from users"
+        query_result = query_json(query=query)
+        return json.dumps(query_result)
+
+@app.route("/assignment11/outer_source", methods=['GET'])
+def os_page():
+    if 'number' in request.args:
+        number = request.args['number']
+        res = requests.get(url=f"https://reqres.in/api/users/{number}")
+        res = res.json()
+        return render_template('assignment11-outer_source.html', user=res['data'])
+    return render_template('assignment11-outer_source.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

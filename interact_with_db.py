@@ -1,4 +1,6 @@
 import mysql.connector
+from flask import jsonify
+import json
 def interact_db (query, query_type: str):
     return_value = False
     connection = mysql.connector.connect ( host= 'localhost',
@@ -24,3 +26,17 @@ def interact_db (query, query_type: str):
     cursor.close()
     return return_value
 
+
+def query_json(query):
+    connection = mysql.connector.connect(host='localhost',
+                                         user='root',
+                                         passwd='308222728',
+                                         database='my_flask_project_db')
+
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    connection.close()
+    cursor.close()
+    return result
