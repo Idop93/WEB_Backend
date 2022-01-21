@@ -101,5 +101,14 @@ def os_page():
         return render_template('assignment11-outer_source.html', user=res['data'])
     return render_template('assignment11-outer_source.html')
 
+@app.route('/assignment12/restapi_users', defaults={'user_id': 1})
+@app.route("/assignment12/restapi_users/<int:user_id>")
+def assignment12(user_id):
+    query = 'select * from users where id=%s' % user_id
+    query_result = query_json(query=query)
+    if len(query_result) == 0:
+        query_result = [{'status': 'unsuccessful', 'message': 'user not found, please try a different user'}]
+    return json.dumps(query_result)
+
 if __name__ == '__main__':
     app.run(debug=True)
